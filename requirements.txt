@@ -1,0 +1,14 @@
+airportsdata
+certifi
+fastapi
+langchain
+langchain-core
+langchain-groq
+langgraph
+langgraph-checkpoint-postgres
+psycopg[binary]==3.3.4
+pycountry
+python-dotenv
+requests
+tavily-python
+uvicorn
