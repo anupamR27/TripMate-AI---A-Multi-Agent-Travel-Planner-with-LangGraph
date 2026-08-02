@@ -356,7 +356,7 @@ def run_travel_agent(user_input: str, thread_id: str | None = None):
 
 # if __name__ == "__main__":
 #     result = run_travel_agent(
-#         "Increase the budget to 50000$"
+#         "increase budget to 10000000$"
 #     )
 
 #     print(result["answer"])
