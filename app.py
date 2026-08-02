@@ -45,5 +45,48 @@ async def home(request: Request):  # HTTP request
         context={}           # for variables
     )
 
+# /api -> its is an API endpoint and not for humans to get into, its just for a JSON return output | These URLs are meant to be called by software
+# Everything outside /api is usually a webpage
+@app.post("/api/travel")
+async def travel_planner(request_data: TravelRequest):
+    try:
+        user_message = request_data.message.strip()
+
+        if not user_message:
+            return JSONResponse(
+                status_code=400,
+                content={
+                    "success": False,
+                    "error": "Message cannot be empty."
+                }
+            )
+
+        result = run_travel_agent(
+            user_input=user_message,
+            thread_id=request_data.thread_id
+        )
+
+        return JSONResponse(
+            content={
+                "success": True,
+                "thread_id": result["thread_id"],
+                "answer": result["answer"],
+                "flight_results": result["flight_results"],
+                "hotel_results": result["hotel_results"],
+                "itinerary": result["itinerary"],
+                "llm_calls": result["llm_calls"],
+            }
+        )
+    except Exception as e:
+        print("ERROR:", e)
+        traceback.print_exc()
+
+        return JSONResponse(
+            status_code=500,
+            content={
+                "success": False,
+                "error": str(e)
+            }
+        )
 
 
