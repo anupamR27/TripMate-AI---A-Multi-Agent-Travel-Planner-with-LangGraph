@@ -1,6 +1,7 @@
 from pathlib import Path
 import traceback
 import uvicorn
+import os
 
 from fastapi import FastAPI, Request
 from fastapi.responses import HTMLResponse, JSONResponse
@@ -110,7 +111,7 @@ async def favicon():
 if __name__ == "__main__":
     uvicorn.run(
         "app:app",  #filename:variable | 
-        host="127.0.0.1",
-        port=8000,
-        reload=True
+        host="0.0.0.0",
+        port=int(os.getenv("PORT", "8000")),
+        reload=False
     )
