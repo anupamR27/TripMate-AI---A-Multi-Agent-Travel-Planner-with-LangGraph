@@ -36,3 +36,14 @@ class TravelRequest(BaseModel):
     message: str
     thread_id: str | None = None
 
+# async -> a method that lets a program start a slow task and keep working on other things instead of waiting
+@app.get("/", response_class=HTMLResponse)
+async def home(request: Request):  # HTTP request
+    return templates.TemplateResponse( # Render an HTML template and send it back
+        request=request,     # HTTP request
+        name="index.html",   # templates/index.html
+        context={}           # for variables
+    )
+
+
+
